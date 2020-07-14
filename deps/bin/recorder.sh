@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-JAVA="/opt/java/openjdk/bin/java"
+JAVA=/opt/java/openjdk/bin/java
 
 OLDDIR=`pwd`
 BIN_DIR=`dirname $0`
