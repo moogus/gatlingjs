@@ -14,11 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-if [ -n "$JAVA_HOME" ]; then
-    JAVA="$JAVA_HOME"/bin/java
-else
-    JAVA=java
-fi
+JAVA="/opt/java/openjdk/bin/java"
 
 OLDDIR=`pwd`
 BIN_DIR=`dirname $0`
