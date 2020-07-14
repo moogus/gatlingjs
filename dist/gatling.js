@@ -16,12 +16,15 @@ var Gatling = function () {
     this.process = process;
     this.os = os;
     this.process.env.GATLING_USER_DIR = this.userDirAbsolutePath;
+    console.log('userDirAbsolutePath', this.process.env.GATLING_USER_DIR);
+    console.log('os', this.os);
   }
 
   _createClass(Gatling, [{
     key: 'exec',
     value: function exec(spawn) {
       this.child = spawn(this.gatlingExecutable, this.args);
+      console.log('args', this.args);
       this.process.stdin.pipe(this.child.stdin);
 
       this.child.stdout.on('data', this.stdoutHandler);
@@ -42,6 +45,7 @@ var Gatling = function () {
   }, {
     key: 'exitHandler',
     value: function exitHandler(code) {
+      console.log('exitHandler', code);
       process.exit(code);
     }
   }, {
@@ -69,6 +73,7 @@ var Gatling = function () {
   }, {
     key: 'gatlingExecutable',
     get: function get() {
+      console.log('gatlingExecutable', this.cwd + this.binaryRoot + fileName);
       var fileName = this.command;
       return this.cwd + this.binaryRoot + fileName;
     }
@@ -77,14 +82,17 @@ var Gatling = function () {
     get: function get() {
       var env = this.process.env.NODE_ENV;
       if (env === 'test' || env === 'development') {
+        console.log('binaryRoot', {env, path: '/deps/bin/'});
         return '/deps/bin/';
       } else {
+        console.log('binaryRoot', {env, path: '/node_modules/gatlingjs/deps/bin/'});
         return '/node_modules/gatlingjs/deps/bin/';
       }
     }
   }, {
     key: 'userDirAbsolutePath',
     get: function get() {
+      console.log('userDirAbsolutePath', this.cwd + '/' + this.defaultUserDirRelativePath);
       return this.cwd + '/' + this.defaultUserDirRelativePath;
     }
   }, {
