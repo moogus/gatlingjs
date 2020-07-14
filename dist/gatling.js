@@ -17,14 +17,13 @@ var Gatling = function () {
     this.os = os;
     this.process.env.GATLING_USER_DIR = this.userDirAbsolutePath;
     console.log('userDirAbsolutePath', this.process.env.GATLING_USER_DIR);
-    console.log('os', this.os);
   }
 
   _createClass(Gatling, [{
     key: 'exec',
     value: function exec(spawn) {
       this.child = spawn(this.gatlingExecutable, this.args);
-      console.log('args', this.args);
+
       this.process.stdin.pipe(this.child.stdin);
 
       this.child.stdout.on('data', this.stdoutHandler);
@@ -58,7 +57,7 @@ var Gatling = function () {
       console.log('Setting bodies path to', path[2]);
       console.log('Setting simulations path to', path[3]);
 
-      return ['-df', path[0], '-rf', path[1], '-bdf', path[2], '-sf', path[3]];
+      return ['-df', path[0], '-rf', path[1], '-bdf', path[2], '-sf', path[3], '-s', 'simulations.MyWaitroseAddToWallet'];
     }
   }, {
     key: 'cwd',
